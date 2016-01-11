@@ -10,7 +10,7 @@ package actors
 	{
 		private var _target:Ball;
 		private var _speed:Number = 0;
-		private var _maxSpeed:Number = 12;
+		private var _maxSpeed:Number = 11;
 		private var _balls:Array;
 		public function set balls(b:Array):void
 		{
@@ -24,7 +24,8 @@ package actors
 		private function init(e:Event):void 
 		{
 			removeEventListener(Event.ADDED_TO_STAGE, init);
-			this.addEventListener(Event.ENTER_FRAME, loop);						
+			this.addEventListener(Event.ENTER_FRAME, loop);
+			this.scaleX = -1;
 		}
 		private function getTarget():void
 		{

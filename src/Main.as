@@ -5,18 +5,23 @@ package
 	import screens.GameOverScreen;
 	import screens.GameScreen;
 	import screens.IntroScreen;
+	import screens.WinnerScreen;
 	import sounds.SoundPlayer;
 	
 	/**
 	 * ...
-	 * @author Pietje Puk
-	 */
+	 * @author Tommy 
+	 * 
+	 * 
+	 * 
+	 * */
 	public class Main extends Sprite 
 	{
 		private var gameScreen:GameScreen
 		private var introScreen:IntroScreen;
 		private var gameOverScreen:GameOverScreen;
 		private var soundPlayer:SoundPlayer;
+		private var winnerScreen:WinnerScreen;
 		
 		public function Main() 
 		{
@@ -42,6 +47,7 @@ package
 			gameScreen = new GameScreen();
 			addChild(gameScreen);
 			gameScreen.addEventListener(GameScreen.GAME_OVER, onGameOver);
+			gameScreen.addEventListener(GameScreen.WIN, onGameWin);
 			
 			
 			
@@ -59,11 +65,30 @@ package
 			
 			
 		}		
+		private function onGameWin(e:Event):void 
+		{
+			removeChild(gameScreen);
+			gameScreen.removeEventListener(GameScreen.WIN, onGameWin);
+						
+			winnerScreen = new WinnerScreen();
+			addChild(winnerScreen);
+			winnerScreen.addEventListener(WinnerScreen.RESET, onReset);
+			
+			
+			
+		}
 		private function onReset(e:Event):void 
 		{
-			removeChild(gameOverScreen);
-			gameOverScreen.removeEventListener(GameOverScreen.RESET, onReset);
-			
+			if (gameOverScreen != null)
+			{
+				removeChild(gameOverScreen);
+				gameOverScreen.removeEventListener(GameOverScreen.RESET, onReset);
+			}
+			else if (winnerScreen != null)
+			{
+				removeChild(winnerScreen);
+				winnerScreen.removeEventListener(WinnerScreen.RESET, onReset);
+			}
 			buildIntroSreen();
 		}
 		

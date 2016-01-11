@@ -72,14 +72,6 @@ package screens
 			
 			right.x = stage.stageWidth / 2 + 30;
 			addChild(right);
-			
-			var line:Shape = new Shape();
-			line.graphics.beginFill(0xffffff, 1);
-			line.graphics.drawRect( -2, 0, 4, 60);
-			line.graphics.endFill();
-			line.x = stage.stageWidth / 2;
-			
-			addChild(line);
 		}
 		
 	}
